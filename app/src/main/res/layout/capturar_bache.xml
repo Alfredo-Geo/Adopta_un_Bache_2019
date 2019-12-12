@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/capturar_bache"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#000000"
+    android:padding="15dp"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        android:weightSum="3">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="2"
+            android:text="Capturar nuevo bache"
+            android:textColor="#ffffff"
+            android:textSize="18dp"
+            android:textStyle="bold">
+        </TextView>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="right"
+            android:layout_weight="1"
+            android:src="@drawable/ic_pinwarning">
+        </ImageView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_place_black_24dp">
+        </ImageView>
+        <TextView
+            android:id="@+id/txt_direccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aqui va la direccion "
+            android:textColor="@color/blue_btn_bg_color"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            ></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txt_latitud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Latitud: "
+            android:textSize="14dp"
+            android:textColor="#ffffff">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_longitud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Longitud: "
+            android:textSize="14dp"
+            android:textColor="#ffffff">
+        </TextView>
+    </LinearLayout>
+        <ImageButton
+            android:id="@+id/btn_camara"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_photo_camera"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:scaleType="fitCenter"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            ></ImageButton>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Presione para subir una fotografia del bache"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:textColor="@color/gray_btn_bg_color">
+    </TextView>
+
+    <Button
+        android:id="@+id/btn_adoptar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/colorPrimary"
+        android:gravity="center"
+        android:text="Adoptar Bahce"
+        android:clickable="true">
+
+    </Button>
+
+</LinearLayout>

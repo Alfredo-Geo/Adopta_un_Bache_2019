@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_google"
+        android:icon="@drawable/ic_map_black_56dp"
+        android:title="Google Maps" />
+    <item
+        android:id="@+id/nav_mapbox"
+        android:icon="@drawable/mapbox56"
+        android:title="MapBox" />
+    <item
+        android:id="@+id/nav_OSM"
+        android:icon="@drawable/osm_menu56"
+        android:title="Open Street Maps" />
+    <item
+        android:id="@+id/nav_arcgis"
+        android:icon="@drawable/esri_menu56"
+        android:title="Arcgis Map" />
+    <item
+        android:id="@+id/nav_user"
+        android:icon="@drawable/ic_face_black_24dp"
+        android:title="Usuarios" />
+</menu>
