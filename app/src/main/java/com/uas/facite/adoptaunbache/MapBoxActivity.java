@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -74,6 +75,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class MapBoxActivity extends AppCompatActivity {
     private MapView mapView;
     private MapboxMap mapboxMap;
@@ -102,18 +104,27 @@ public class MapBoxActivity extends AppCompatActivity {
         btn_adoptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bitmap = ((BitmapDrawable)ImageCamara.getDrawable()).getBitmap();
+                //obtener la imagen del boton de la camara
+                Bitmap foto = ((BitmapDrawable)btn_camara.getDrawable()).getBitmap();
+                //convertimos la imagen a un arreglo de bytes
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] imageBytes = baos.toByteArray();
-                String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-                RegistrarBache registro = new RegistrarBache(txt_direccion.getText().toString(),txt_latitud.getText().toString(),txt_latitud.getText().toString(),imageString);
+                foto.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] fotobytes = baos.toByteArray();
+                //convertimos a base64 para guardarlo en la base de datos
+                String fotostring = Base64.encodeToString(fotobytes, Base64.DEFAULT);
+                //mandamos llamar la clase para registrar los datos, mandandole los parametros
+                RegistrarBache registro = new RegistrarBache(txt_direccion.getText().toString(),txt_latitud.getText().toString(),txt_latitud.getText().toString(),fotostring);
+                //ejecutamos la funcion de registrar bache
                 registro.execute();
+                //cerramos el bottomsheet
                 bottomSheet.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                //limpiamos los controles del bottomsheet
                 txt_direccion.setText("");
                 txt_latitud.setText("");
                 txt_longitud.setText("");
-                btn_camara.setVisibility(View.VISIBLE);
+                btn_camara.setImageResource(R.drawable.ic_photo_camera);
+                //btn_camara.setRotation(0);
+                //btn_camara.setVisibility(View.VISIBLE);
             }
         });
 
@@ -270,8 +281,13 @@ public class MapBoxActivity extends AppCompatActivity {
         //si se toma una fotografia
         if (requestCode ==1){
             Bitmap foto = (Bitmap)intent.getExtras().get("data");
-            Drawable fotobache = new BitmapDrawable(foto);
+            //se genero un nuevo bitmap porque en mi celular salia rotado
+            Matrix matrix = new Matrix();
+            matrix.postRotate(90);
+            Bitmap fotor = Bitmap.createBitmap(foto, 0, 0, foto.getWidth(), foto.getHeight(), matrix, true);
+            Drawable fotobache = new BitmapDrawable(fotor);
             btn_camara.setImageDrawable(fotobache);
+            //btn_camara.setRotation(90);
         }else if(requestCode==2){
             Uri rutaSelct = intent.getData();
             String[] rutafoto = {MediaStore.Images.Media.DATA};
@@ -281,8 +297,13 @@ public class MapBoxActivity extends AppCompatActivity {
             String archivoFoto = cursor.getString(columnIndex);
             cursor.close();
             Bitmap foto = (BitmapFactory.decodeFile(archivoFoto));
+            //se genero un nuevo bitmap porque en mi celular salia rotado
+            Matrix matrix = new Matrix();
+            matrix.postRotate(90);
+            Bitmap fotor = Bitmap.createBitmap(foto, 0, 0, foto.getWidth(), foto.getHeight(), matrix, true);
             Drawable fotodrawable = new BitmapDrawable(foto);
             btn_camara.setImageDrawable(fotodrawable);
+            //btn_camara.setRotation(90);
         }
     }
     //obtener la direccion en cuanto a la latitud y longitud
@@ -409,3 +430,4 @@ public class MapBoxActivity extends AppCompatActivity {
         }
     }
 }
+
